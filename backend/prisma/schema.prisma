@@ -18,6 +18,7 @@ model User {
   role       String   @default("admin")
   createdAt  DateTime @default(now())
   produits    Produit[]
+  ventes      Vente[]
 }
 
 model Produit {
@@ -32,4 +33,22 @@ model Produit {
   user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  ventes      Vente[]
+}
+
+model Vente {
+  id           Int      @id @default(autoincrement())
+  produitId    Int?
+  produit      Produit? @relation(fields: [produitId], references: [id])
+  quantite     Int
+  prixVente    Float
+  prixAchat    Float
+  benefice     Float
+  marge        Float
+  modePaiement String   @default("Cash")
+  clientNom    String?
+  note         String?
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
 }

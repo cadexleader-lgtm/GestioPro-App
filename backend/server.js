@@ -4,6 +4,7 @@ require('dotenv').config()
 
 const authRoutes = require('./routes/authRoutes')
 const produitRoutes = require('./routes/produitRoutes')
+const venteRoutes = require('./routes/venteRoutes')
 
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRoutes)
 app.use('/api/produits', produitRoutes)
+app.use('/api/ventes', venteRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'Serveur GestioPro en ligne ✓' })
