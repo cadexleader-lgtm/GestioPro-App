@@ -2,12 +2,17 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 
+const authRoutes = require('./routes/authRoutes')
+const produitRoutes = require('./routes/produitRoutes')
+
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-// Route de test
+app.use('/api/auth', authRoutes)
+app.use('/api/produits', produitRoutes)
+
 app.get('/', (req, res) => {
   res.json({ message: 'Serveur GestioPro en ligne ✓' })
 })

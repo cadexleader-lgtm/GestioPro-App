@@ -1,10 +1,10 @@
 generator client {
-  provider = "prisma-client"
-  output   = "./generated"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -17,4 +17,19 @@ model User {
   secteur    String?
   role       String   @default("admin")
   createdAt  DateTime @default(now())
+  produits    Produit[]
+}
+
+model Produit {
+  id          Int      @id @default(autoincrement())
+  nom         String
+  prixAchat   Float
+  prixVente   Float
+  categorie   String?
+  stock       Int      @default(0)
+  description String?
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

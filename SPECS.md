@@ -1,9 +1,9 @@
 # SPECS.md — Cahier des Charges GestioPro
 **Fondateur & CEO : HAZOUME CLARENCE ALVIN**
 **Email : hazoumeclarence@gmail.com**
-**Téléphone : +229 56 50 13 48**
+**Téléphone : +229 56 50 13 48 / +229 41 82 27 30**
 **Ville : Cotonou, Bénin**
-**Date : Avril 2026**
+**Date : 06 Avril 2026**
 **Version : 1.0**
 
 ---
