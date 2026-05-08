@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Produits from './pages/Produits'
 import NouvelleVente from './pages/NouvelleVente'
 import Ventes from './pages/Ventes'
+import Clients from './pages/Clients'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/produits" element={<Produits />} />
         <Route path="/ventes/new" element={<NouvelleVente />} />
         <Route path="/ventes" element={<Ventes />} />
+        <Route path="/clients" element={<Clients />} />
       </Routes>
     </BrowserRouter>
   )

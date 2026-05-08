@@ -1,3 +1,4 @@
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -65,9 +66,9 @@ export default function Dashboard() {
     setUser(JSON.parse(u))
     const headers = { Authorization: `Bearer ${t}` }
     Promise.all([
-      axios.get('http://localhost:5000/api/ventes/stats', { headers }),
-      axios.get('http://localhost:5000/api/ventes', { headers }),
-      axios.get('http://localhost:5000/api/produits', { headers }),
+      axios.get(`${API}/api/ventes/stats`, { headers }),
+axios.get(`${API}/api/ventes`, { headers }),
+axios.get(`${API}/api/produits`, { headers }),
     ]).then(([s, v, p]) => {
       setStats(s.data)
       setVentes(v.data.slice(0, 6))

@@ -1,3 +1,4 @@
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 import { useState } from 'react'
 import axios from 'axios'
 
@@ -15,7 +16,7 @@ export default function Register() {
   const handleSubmit = async () => {
     setLoading(true); setError('')
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', form)
+      const res = await axios.post(`${API}/api/auth/register`, form)
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
       window.location.href = '/dashboard'

@@ -1,3 +1,4 @@
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
@@ -15,7 +16,7 @@ export default function NouvelleVente() {
 
   useEffect(() => {
     if (!token) { navigate('/login'); return }
-    axios.get('http://localhost:5000/api/produits', { headers }).then(r => setProduits(r.data)).catch(console.error)
+    axios.get(`${API}/api/produits`, { headers }).then(r => setProduits(r.data)).catch(console.error)
   }, [])
 
   const handleChange = (e) => {
@@ -37,7 +38,7 @@ export default function NouvelleVente() {
   const handleSubmit = async (e) => {
     e.preventDefault(); setLoading(true)
     try {
-      await axios.post('http://localhost:5000/api/ventes', form, { headers })
+      await axios.post(`${API}/api/ventes`, form, { headers })
       setSuccess(true)
       setTimeout(() => {
         setSuccess(false)
