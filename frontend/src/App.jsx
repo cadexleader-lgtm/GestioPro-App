@@ -6,6 +6,10 @@ import Produits from './pages/Produits'
 import NouvelleVente from './pages/NouvelleVente'
 import Ventes from './pages/Ventes'
 import Clients from './pages/Clients'
+import Stock from './pages/Stock'
+import Rapports from './pages/Rapports'
+import Plus from './pages/Plus'
+import Settings from './pages/Settings'
 
 export default function App() {
   return (
@@ -19,6 +23,10 @@ export default function App() {
         <Route path="/ventes/new" element={<NouvelleVente />} />
         <Route path="/ventes" element={<Ventes />} />
         <Route path="/clients" element={<Clients />} />
+        <Route path="/stock" element={<Stock />} />
+        <Route path="/rapports" element={<Rapports />} />
+        <Route path="/plus" element={<Plus />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   )

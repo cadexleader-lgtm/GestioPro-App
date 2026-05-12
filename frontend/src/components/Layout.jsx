@@ -7,6 +7,7 @@ import {
   ChevronLeft, ChevronRight, Menu, X, Plus,
   TrendingUp, Zap
 } from 'lucide-react'
+import { PlusBottomSheet } from '../pages/Plus'
 
 const NAV_ITEMS = [
   { path: '/dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
@@ -15,6 +16,8 @@ const NAV_ITEMS = [
   { path: '/clients',   label: 'Clients',          icon: Users },
   { path: '/stock',     label: 'Stock',            icon: ArchiveX },
   { path: '/rapports',  label: 'Rapports',         icon: BarChart3 },
+  { path: '/settings',  label: 'Paramètres',       icon: Settings },
+  { path: '/plus',      label: 'Plus',             icon: Plus },
 ]
 
 const BOTTOM_NAV = [
@@ -23,6 +26,8 @@ const BOTTOM_NAV = [
   { path: '/produits',  label: 'Produits', icon: Package },
   { path: '/clients',   label: 'Clients',  icon: Users },
   { path: '/stock',     label: 'Stock',    icon: ArchiveX },
+  { path: '/settings',  label: 'Paramètres', icon: Settings },
+  { path: '/plus',      label: 'Plus',     icon: Plus },
 ]
 
 export default function Layout({ children }) {
@@ -32,6 +37,7 @@ export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled]   = useState(false)
+  const [plusOpen, setPlusOpen]   = useState(false)
 
   useEffect(() => {
     const u = localStorage.getItem('user')
@@ -173,7 +179,13 @@ export default function Layout({ children }) {
             const Icon   = item.icon
             return (
               <motion.button key={item.path} className="nav-item"
-                onClick={() => navigate(item.path)}
+                onClick={() => {
+                  if (item.path === '/plus') {
+                    navigate(item.path)
+                  } else {
+                    navigate(item.path)
+                  }
+                }}
                 title={collapsed ? item.label : ''}
                 whileTap={{ scale: .97 }}
                 style={{
@@ -210,21 +222,6 @@ export default function Layout({ children }) {
             )
           })}
 
-          {/* Séparateur */}
-          <div style={{ height: 1, background: '#F1F5F9', margin: '10px 6px' }}/>
-
-          {/* Paramètres */}
-          <motion.button className="nav-settings" whileTap={{ scale: .97 }}
-            onClick={() => navigate('/parametres')}
-            style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: collapsed ? '10px 0' : '9px 10px', justifyContent: collapsed ? 'center' : 'flex-start', borderRadius: 11, border: 'none', cursor: 'pointer', background: 'transparent', color: '#94A3B8', fontSize: 13.5, fontWeight: 500, fontFamily: "'DM Sans',sans-serif", transition: 'all .14s' }}
-            title={collapsed ? 'Paramètres' : ''}>
-            <div style={{ width: 32, height: 32, borderRadius: 9, background: '#F8FAFC', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Settings size={16} strokeWidth={1.75}/>
-            </div>
-            <AnimatePresence>
-              {!collapsed && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>Paramètres</motion.span>}
-            </AnimatePresence>
-          </motion.button>
         </nav>
 
         {/* Plan upgrade */}
@@ -379,7 +376,13 @@ export default function Layout({ children }) {
           const Icon   = item.icon
           return (
             <motion.button key={item.path} className="bottom-nav-btn"
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                if (item.path === '/plus') {
+                  setPlusOpen(true)
+                } else {
+                  navigate(item.path)
+                }
+              }}
               whileTap={{ scale: .88 }}
               style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px 0 8px', border: 'none', background: 'transparent', cursor: 'pointer', color: active ? '#2563EB' : '#94A3B8', position: 'relative', fontFamily: "'DM Sans',sans-serif" }}>
               {/* Indicateur haut */}
@@ -407,6 +410,11 @@ export default function Layout({ children }) {
           .mobile-burger { display: flex !important; }
         }
       `}</style>
+
+      {/* ══════════════════════════════════════════════
+          BOTTOM SHEET PLUS MOBILE
+      ══════════════════════════════════════════════ */}
+      <PlusBottomSheet open={plusOpen} onClose={() => setPlusOpen(false)} />
     </div>
   )
 }
