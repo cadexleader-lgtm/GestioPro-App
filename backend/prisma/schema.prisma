@@ -8,16 +8,19 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   nom        String
-  email      String   @unique
+  email      String    @unique
   password   String
   telephone  String?
   entreprise String?
   secteur    String?
-  role       String   @default("admin")
-  createdAt  DateTime @default(now())
-  produits    Produit[]
+  role       String    @default("admin")
+  createdAt  DateTime  @default(now())
+  clients    Client[]
+  produits   Produit[]
+  settings   Settings?
+  ventes     Vente[]
 }
 
 model Produit {
@@ -29,7 +32,63 @@ model Produit {
   stock       Int      @default(0)
   description String?
   userId      Int
-  user        User     @relation(fields: [userId], references: [id])
+  clientId    Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  client      Client?  @relation(fields: [clientId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+  ventes      Vente[]
+}
+
+model Client {
+  id        Int       @id @default(autoincrement())
+  nom       String
+  telephone String?
+  email     String?
+  adresse   String?
+  note      String?
+  dette     Float     @default(0)
+  userId    Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id])
+  produits  Produit[]
+  ventes    Vente[]
+}
+
+model Vente {
+  id           Int      @id @default(autoincrement())
+  quantite     Int
+  prixVente    Float
+  prixAchat    Float?
+  benefice     Float?
+  marge        Int?
+  modePaiement String   @default("Cash")
+  clientNom    String?
+  note         String?
+  produitId    Int?
+  clientId     Int?
+  userId       Int
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id])
+  client       Client?  @relation(fields: [clientId], references: [id])
+  produit      Produit? @relation(fields: [produitId], references: [id])
+}
+
+model Settings {
+  id                    Int      @id @default(autoincrement())
+  userId                Int      @unique
+  companyName           String
+  companyPhone          String?
+  companyEmail          String?
+  companyAddress        String?
+  companyLogo           String?
+  sector                String   @default("Commerce")
+  currency              String   @default("XAF")
+  darkMode              Boolean  @default(false)
+  stockAlert            Boolean  @default(true)
+  whatsappNotifications Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id])
 }

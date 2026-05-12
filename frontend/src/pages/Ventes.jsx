@@ -1,3 +1,4 @@
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
@@ -16,8 +17,8 @@ export default function Ventes() {
   useEffect(() => {
     if (!token) { navigate('/login'); return }
     Promise.all([
-      axios.get('http://localhost:5000/api/ventes', { headers }),
-      axios.get('http://localhost:5000/api/ventes/stats', { headers }),
+      axios.get(`${API}/api/ventes`, { headers }),
+      axios.get(`${API}/api/ventes/stats`, { headers }),
     ]).then(([v, s]) => { setVentes(v.data); setStats(s.data) })
       .catch(console.error).finally(() => setLoading(false))
   }, [])

@@ -170,6 +170,16 @@ GestioPro est une plateforme SaaS de gestion multi-secteurs conçue pour les PME
 
 ## 5. MODULES PAR SECTEUR
 
+GestioPro utilise une architecture “Single Core / Multi-Sector”.
+
+Une seule application centrale alimente tous les secteurs.
+
+L’interface et les fonctionnalités s’adaptent dynamiquement selon :
+- le secteur choisi
+- les modules activés
+- les champs personnalisés
+- les règles métier du client
+
 ### 5.1 Commerce / Retail (Phase 1)
 - Gestion fournisseurs
 - Caisse journalière
@@ -250,6 +260,20 @@ GestioPro est une plateforme SaaS de gestion multi-secteurs conçue pour les PME
 - Relances automatiques impayés
 - Rapports réglementaires
 
+Secteur “Tech Store”
+→ IMEI
+→ Garantie
+→ Série
+
+Secteur “Restaurant”
+→ Table
+→ Serveur
+→ Cuisine
+
+Secteur “Supermarché”
+→ Scan code-barres
+→ Promotions
+→ Panier multi-produits
 ---
 
 ## 6. MODULES TRANSVERSAUX (PHASE FUTURE)
@@ -275,6 +299,13 @@ GestioPro est une plateforme SaaS de gestion multi-secteurs conçue pour les PME
 - Alertes de retard
 
 ### 6.4 Marketplace Fournisseurs
+Les fournisseurs peuvent proposer leurs produits directement aux commerces utilisant GestioPro.
+
+L’IA peut :
+- comparer les prix
+- détecter les anomalies
+- recommander un fournisseur moins cher
+- proposer automatiquement du réapprovisionnement
 - Commander du stock directement depuis l'app
 - Comparer les fournisseurs
 - Paiements B2B intégrés
@@ -292,6 +323,27 @@ GestioPro est une plateforme SaaS de gestion multi-secteurs conçue pour les PME
 - Suggestions de prix optimaux
 - Alertes proactives
 
+L’utilisateur peut demander à l’IA :
+
+“Ajoute un champ kilométrage”
+“Ajoute un numéro de chèque”
+“Ajoute les pointures”
+
+L’IA configure automatiquement l’interface sans développement manuel.
+
+GestioPro vise à devenir un copilote business intelligent pour les PME africaines.
+
+L’IA analysera :
+- les ventes
+- les pertes
+- les stocks
+- les habitudes clients
+- les marges
+
+Afin de proposer :
+- des prédictions
+- des alertes
+- des recommandations automatiques
 ---
 
 ## 7. STACK TECHNIQUE
@@ -319,6 +371,13 @@ GestioPro est une plateforme SaaS de gestion multi-secteurs conçue pour les PME
 - **Redis** (cache — Phase 2)
 - **Cloudflare CDN** (Phase 2)
 - **Socket.IO** (temps réel — Phase 2)
+
+- Une seule branche principale
+- Une branche par fonctionnalité
+- Aucun fork par secteur
+- Architecture modulaire
+- Composants dynamiques
+- Configuration pilotée par données
 
 ---
 

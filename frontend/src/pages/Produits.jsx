@@ -1,3 +1,4 @@
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
@@ -34,7 +35,7 @@ export default function Produits() {
 
   const fetchProduits = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/produits', { headers })
+      const res = await axios.get(`${API}/api/produits`, { headers })
       setProduits(res.data)
     } catch (e) { console.error(e) }
     finally { setLoading(false) }
@@ -45,7 +46,7 @@ export default function Produits() {
   const handleSubmit = async (e) => {
     e.preventDefault(); setSaving(true)
     try {
-      await axios.post('http://localhost:5000/api/produits', form, { headers })
+      await axios.post(`${API}/api/produits`, form, { headers })
       setForm({ nom: '', prixAchat: '', prixVente: '', categorie: '', stock: '', description: '' })
       setShowForm(false)
       fetchProduits()
@@ -55,7 +56,7 @@ export default function Produits() {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Supprimer ce produit ?')) return
-    try { await axios.delete(`http://localhost:5000/api/produits/${id}`, { headers }); fetchProduits() }
+    try { await axios.delete(`${API}/api/produits/${id}`, { headers }); fetchProduits() }
     catch (e) { console.error(e) }
   }
 
